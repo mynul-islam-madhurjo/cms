@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
+    public function index(){
+        $users = DB::table('users')->get();
+        return response()->json($users);
+    }
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -29,19 +33,19 @@ class UserController extends Controller
     public function create()
     {
         // Get the current date
-        $currentDate = Carbon::now()->toDateString();
-
-        $rows = DB::table('users')
-            ->select('id')
-            ->whereDate('start_date', '<=', $currentDate)
-            ->where(function ($query) use ($currentDate) {
-                $query->whereDate('end_date', '>=', $currentDate)
-                    ->orWhereNull('end_date');
-            })
-            ->groupBy('name')
-            ->get();
-
-        dd($rows);
+//        $currentDate = Carbon::now()->toDateString();
+//
+//        $rows = DB::table('users')
+//            ->select('id')
+//            ->whereDate('start_date', '<=', $currentDate)
+//            ->where(function ($query) use ($currentDate) {
+//                $query->whereDate('end_date', '>=', $currentDate)
+//                    ->orWhereNull('end_date');
+//            })
+//            ->groupBy('name')
+//            ->get();
+//
+//        dd($rows);
 
         return view('create');
     }
