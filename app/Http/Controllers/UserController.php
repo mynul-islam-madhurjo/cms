@@ -16,18 +16,13 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'id' => 'required|unique:users',
             'name'=> 'required',
-            'email'=> 'required',
-            'password'=> 'required',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
+            'email'=> 'required'
         ]);
 
         User::create($validatedData);
 
-
-        return redirect()->back()->with('success', 'User created successfully.');
+        return response('Inserted Successfully');
     }
 
     public function create()
