@@ -45,4 +45,12 @@ class UserController extends Controller
         return view('create');
     }
 
+    public function destroy($id){
+
+        DB::table('users')
+            ->where('id',$id)
+            ->delete();
+        return response('Deleted');
+    }
+
 }
