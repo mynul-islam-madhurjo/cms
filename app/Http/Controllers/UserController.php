@@ -45,6 +45,14 @@ class UserController extends Controller
         return view('create');
     }
 
+    public function show($id){
+        $user = DB::table('users')
+        ->where('id',$id)
+        ->first();
+
+        return response()->json($user);
+    }
+
     public function destroy($id){
 
         DB::table('users')
