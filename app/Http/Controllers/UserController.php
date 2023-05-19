@@ -52,6 +52,18 @@ class UserController extends Controller
 
         return response()->json($user);
     }
+    public function update(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'email' => 'required'
+        ]);
+
+        $user = User::where('id', $id)->first();
+        $user->update($validatedData);
+
+        return response('Updated Successfully');
+    }
 
     public function destroy($id){
 
